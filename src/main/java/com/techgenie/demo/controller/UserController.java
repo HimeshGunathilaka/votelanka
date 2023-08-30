@@ -28,6 +28,7 @@ public class UserController {
     public String getName(int id){return userService.userName(id);}
 
     @PostMapping("/push")
-    public void push(@RequestBody com.techgenie.demo.dto.domain.User user){
-        userService.save(user);}
+    public void push(@RequestBody com.techgenie.demo.dto.domain.User user) {
+        userService.save(user);
+    }
 }
