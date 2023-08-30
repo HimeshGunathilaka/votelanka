@@ -1,17 +1,15 @@
 package com.techgenie.demo.dto.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.security.PrivilegedAction;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Builder
 @Entity
 @Table(name = "USER_TYPE")
@@ -19,13 +17,12 @@ public class UserType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userTypeId")
-    private long userTypeId;
+    @Column(name = "typeId")
+    private long typeId;
 
-    @Column(name = "userType")
-    private String userType;
+    @Column(name = "type")
+    private String type;
 
-//    @ManyToMany(mappedBy = "userTypes")
-//    private List<User> users;
-
+    @ManyToMany(mappedBy = "userTypes")
+    private List<User> users;
 }

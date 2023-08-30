@@ -31,7 +31,7 @@ public class User {
     @ManyToMany
     @JoinTable(
             name = "USER_TYPE_EXTENDED",
-            joinColumns = @JoinColumn(name = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "USER_TYPES"))
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "USER_TYPE"))
     private List<UserType> userTypes;
 }
