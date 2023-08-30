@@ -6,6 +6,7 @@ import com.techgenie.demo.service.inf.IUserTypeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class UserTypeService implements IUserTypeService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Transactional
     @Override
     public List<UserType> getAllTypes() {
         userTypeRepository.findAll().forEach(userType -> {
@@ -30,6 +32,7 @@ public class UserTypeService implements IUserTypeService {
         return userTypes;
     }
 
+    @Transactional
     @Override
     public List<com.techgenie.demo.dto.model.UserType> getTypes() {
         return userTypeRepository.findAll();
@@ -45,6 +48,7 @@ public class UserTypeService implements IUserTypeService {
         userTypeRepository.save(userType);
     }
 
+    @Transactional
     @Override
     public com.techgenie.demo.dto.model.UserType findById(int id) {
         return modelMapper.map(userTypeRepository.findById(id), com.techgenie.demo.dto.model.UserType.class);

@@ -6,6 +6,7 @@ import com.techgenie.demo.service.inf.IUserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +22,13 @@ public class UserService implements IUserService {
 
     List<com.techgenie.demo.dto.domain.User> users =  new ArrayList<>();
 
+    @Transactional
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
+    @Transactional
     @Override
     public List<com.techgenie.demo.dto.domain.User> getAllDomains(){
         userRepository.findAll().forEach(user -> {
@@ -38,11 +41,13 @@ public class UserService implements IUserService {
                         .build());});
     return users;}
 
+    @Transactional
     @Override
     public com.techgenie.demo.dto.domain.User findById(int id) {
         return modelMapper.map(userRepository.findById(id), com.techgenie.demo.dto.domain.User.class);
     }
 
+    @Transactional
     @Override
     public String userName(int id) {
         return modelMapper.map(userRepository.findById(id), com.techgenie.demo.dto.domain.User.class).getPassword();
