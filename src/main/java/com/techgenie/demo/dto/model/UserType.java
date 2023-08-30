@@ -23,6 +23,6 @@ public class UserType {
     @Column(name = "type")
     private String type;
 
-    @OneToMany(mappedBy = "types")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "types", cascade = CascadeType.ALL)
     private List<User> users;
 }

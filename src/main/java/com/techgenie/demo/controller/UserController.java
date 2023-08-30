@@ -20,7 +20,7 @@ public class UserController {
 
     @GetMapping("/users")
     public List<User> readAll() {
-        return userRepository.findAll();
+        return userService.getAll();
     }
 
     @GetMapping("/domains")

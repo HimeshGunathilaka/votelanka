@@ -19,18 +19,11 @@ public class User {
 
     @Column(name = "Name")
     private String userName;
-//
-//    @Column(name = "UserType")
-//    private long userType;
 
     @Column(name = "Password")
     private String userPassword;
 
-    //    @JoinTable(
-//            name = "USER_TYPE_EXTENDED",
-//            joinColumns = @JoinColumn(name = "USER_ID"),
-//            inverseJoinColumns = @JoinColumn(name = "USER_TYPE"))
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_type")
     private UserType types;
 }
