@@ -23,6 +23,6 @@ public class UserType {
     @Column(name = "type")
     private String type;
 
-    @ManyToMany(mappedBy = "userTypes")
+    @OneToMany(mappedBy = "types")
     private List<User> users;
 }

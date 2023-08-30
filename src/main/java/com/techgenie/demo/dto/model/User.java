@@ -3,8 +3,6 @@ package com.techgenie.demo.dto.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Data
 @Entity
 @Getter
@@ -21,17 +19,17 @@ public class User {
 
     @Column(name = "Name")
     private String userName;
-
-    @Column(name = "UserType")
-    private long userType;
+//
+//    @Column(name = "UserType")
+//    private long userType;
 
     @Column(name = "Password")
     private String userPassword;
 
-    @ManyToMany
+    @ManyToOne
     @JoinTable(
             name = "USER_TYPE_EXTENDED",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "USER_TYPE"))
-    private List<UserType> userTypes;
+    private UserType types;
 }

@@ -31,6 +31,6 @@ class VotelankaApplicationTests {
 	@Test
 	void save(){
 		userService.save(User.builder()
-				.name("dinesha").password("45625").type(8).build());
+				.name("dinesha").password("45625").types(null).build());
 	}
 }

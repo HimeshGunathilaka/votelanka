@@ -1,7 +1,9 @@
 package com.techgenie.demo.dto.domain;
 
+import com.techgenie.demo.dto.model.UserType;
 import lombok.*;
-import org.modelmapper.ModelMapper;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,6 +14,7 @@ import org.modelmapper.ModelMapper;
 public class User {
     private long id;
     private String name;
-    private long type;
+    private List<UserType> types;
+    //    private long type;
     private String password;
 }

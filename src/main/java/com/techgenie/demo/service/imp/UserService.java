@@ -32,7 +32,8 @@ public class UserService implements IUserService {
         users.add(com.techgenie.demo.dto.domain.User.builder()
                         .id(user.getUserId())
                         .name(user.getUserName())
-                        .type(user.getUserType())
+//                        .type(user.getUserType())
+                .types(null)
                         .password(user.getUserPassword())
                         .build());});
     return users;}
