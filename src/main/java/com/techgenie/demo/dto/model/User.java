@@ -26,10 +26,11 @@ public class User {
     @Column(name = "Password")
     private String userPassword;
 
-    @ManyToOne
-    @JoinTable(
-            name = "USER_TYPE_EXTENDED",
-            joinColumns = @JoinColumn(name = "USER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "USER_TYPE"))
+    //    @JoinTable(
+//            name = "USER_TYPE_EXTENDED",
+//            joinColumns = @JoinColumn(name = "USER_ID"),
+//            inverseJoinColumns = @JoinColumn(name = "USER_TYPE"))
+    @OneToOne
+    @JoinColumn(name = "user_type")
     private UserType types;
 }

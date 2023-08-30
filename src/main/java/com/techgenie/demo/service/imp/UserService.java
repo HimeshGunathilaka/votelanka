@@ -33,7 +33,7 @@ public class UserService implements IUserService {
                         .id(user.getUserId())
                         .name(user.getUserName())
 //                        .type(user.getUserType())
-                .types(null)
+                .types(user.getTypes())
                         .password(user.getUserPassword())
                         .build());});
     return users;}

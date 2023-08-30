@@ -3,8 +3,6 @@ package com.techgenie.demo.dto.domain;
 import com.techgenie.demo.dto.model.UserType;
 import lombok.*;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -14,7 +12,7 @@ import java.util.List;
 public class User {
     private long id;
     private String name;
-    private List<UserType> types;
+    private UserType types;
     //    private long type;
     private String password;
 }

@@ -19,7 +19,9 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/users")
-    public List<User> readAll(){return userService.getAll();}
+    public List<User> readAll() {
+        return userRepository.findAll();
+    }
 
     @GetMapping("/domains")
     public List<com.techgenie.demo.dto.domain.User> readAllDomains(){return userService.getAllDomains();}
