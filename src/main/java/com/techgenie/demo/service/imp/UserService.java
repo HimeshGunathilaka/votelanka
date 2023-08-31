@@ -29,12 +29,13 @@ public class UserService implements IUserService {
         //return propertyList.stream().map(p -> modelMapper.map(p, PropertyExtended.class)).collect(Collectors.toList());
         userRepository.findAll().forEach(user -> {
         users.add(com.techgenie.demo.dto.domain.User.builder()
-                        .id(user.getUserId())
-                        .name(user.getUserName())
+                .id(user.getUserId())
+                .name(user.getUserName())
                 .types(user.getTypes().getType())
                 .area(user.getVoterArea().getAreaName())
-                        .password(user.getUserPassword())
-                        .build());});
+                .password(user.getUserPassword())
+                .build());
+        });
     return users;}
 
     @Override

@@ -3,6 +3,7 @@ package com.techgenie.demo;
 import com.techgenie.demo.dto.model.UserType;
 import com.techgenie.demo.repository.UserRepository;
 import com.techgenie.demo.repository.UserTypeRepository;
+import com.techgenie.demo.service.inf.IPartyService;
 import com.techgenie.demo.service.inf.IUserService;
 import com.techgenie.demo.service.inf.IUserTypeService;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,9 @@ class VotelankaApplicationTests {
 
 	@Autowired
 	private IUserTypeService userTypeService;
+
+    @Autowired
+    private IPartyService partyService;
 
     List<String> list = new ArrayList<>();
 	@Test
@@ -63,8 +67,12 @@ class VotelankaApplicationTests {
 
 	@Test
 	void test(){
-        System.out.println(userService.findUserById(1).getName());
-        ;
+        partyService.findAllParties().forEach(party -> {
+            System.out.println(party.getId());
+            System.out.println(party.getNo());
+            System.out.println(party.getName());
+            System.out.println(party.getImage());
+        });
     }
 
 	@Test
@@ -77,14 +85,12 @@ class VotelankaApplicationTests {
 	@Test
 	void Display(){
         userService.findAllUsers().forEach(user -> {
+            System.out.println(user.getId());
             System.out.println(user.getName());
             System.out.println(user.getTypes());
             System.out.println(user.getArea());
-
+            System.out.println(user.getPassword());
         });
-//		userTypeRepository.findAll().forEach(userType -> {
-//			System.out.println(userType.getType());
-//		});
 	}
 
 	@Test

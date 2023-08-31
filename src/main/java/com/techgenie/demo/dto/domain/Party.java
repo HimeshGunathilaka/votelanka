@@ -8,12 +8,9 @@ import lombok.*;
 @Setter
 @Builder
 @Data
-public class Candidate {
+public class Party {
     private long id;
     private String name;
-    private String party;
-    private String no;
     private String image;
-    private String area;
-    private String mobileNo;
+    private long no;
 }
