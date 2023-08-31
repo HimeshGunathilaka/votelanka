@@ -25,6 +25,8 @@ public class UserService implements IUserService {
     @Transactional
     @Override
     public List<com.techgenie.demo.dto.domain.User> findAllUsers() {
+
+        //return propertyList.stream().map(p -> modelMapper.map(p, PropertyExtended.class)).collect(Collectors.toList());
         userRepository.findAll().forEach(user -> {
         users.add(com.techgenie.demo.dto.domain.User.builder()
                         .id(user.getUserId())
@@ -39,8 +41,16 @@ public class UserService implements IUserService {
         userRepository.save(modelMapper.map(user,User.class));
     }
 
+    @Transactional
     @Override
     public com.techgenie.demo.dto.domain.User findUserById(int id) {
+//        return modelMapper.map(userRepository.findById(id).map(user -> User.builder()
+//                .userId(user.getUserId())
+//                .userName(user.getUserName())
+//                .userPassword(user.getUserPassword())
+//                .types(user.getTypes())
+//                .build()),com.techgenie.demo.dto.domain.User.class);
         return null;
     }
+
 }

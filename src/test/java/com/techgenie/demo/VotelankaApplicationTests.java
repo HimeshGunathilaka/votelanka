@@ -1,6 +1,5 @@
 package com.techgenie.demo;
 
-import com.techgenie.demo.dto.domain.User;
 import com.techgenie.demo.dto.model.UserType;
 import com.techgenie.demo.repository.UserRepository;
 import com.techgenie.demo.repository.UserTypeRepository;
@@ -64,16 +63,8 @@ class VotelankaApplicationTests {
 
 	@Test
 	void test(){
-//		userRepository.findAll().forEach(user -> {
-//			System.out.println(user.getTypes().getType());
-//		});
-//	userService.getAll().forEach(user -> {
-//		System.out.println(user.getUserName());
-//	});
-
-        userService.findAllUsers().forEach(user -> {
-            System.out.println(user.getTypes());
-        });
+        System.out.println(userService.findUserById(1).getName());
+        ;
     }
 
 	@Test
@@ -95,7 +86,7 @@ class VotelankaApplicationTests {
 
 	@Test
 	void save(){
-		userService.save(User.builder()
-				.name("mushthak").password("45625").types(userTypeService.findById(1)).build());
+//		userService.save(User.builder()
+//				.name("mushthak").password("45625").types(userTypeService.findById(1)).build());
 	}
 }
