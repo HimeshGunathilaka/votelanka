@@ -24,37 +24,23 @@ public class UserService implements IUserService {
 
     @Transactional
     @Override
-    public List<User> getAll() {
-        return userRepository.findAll();
-    }
-
-    @Transactional
-    @Override
-    public List<com.techgenie.demo.dto.domain.User> getAllDomains(){
+    public List<com.techgenie.demo.dto.domain.User> findAllUsers() {
         userRepository.findAll().forEach(user -> {
         users.add(com.techgenie.demo.dto.domain.User.builder()
                         .id(user.getUserId())
                         .name(user.getUserName())
-//                        .type(user.getUserType())
-                .types(user.getTypes())
+                .types(user.getTypes().getType())
                         .password(user.getUserPassword())
                         .build());});
     return users;}
 
-    @Transactional
-    @Override
-    public com.techgenie.demo.dto.domain.User findById(int id) {
-        return modelMapper.map(userRepository.findById(id), com.techgenie.demo.dto.domain.User.class);
-    }
-
-    @Transactional
-    @Override
-    public String userName(int id) {
-        return modelMapper.map(userRepository.findById(id), com.techgenie.demo.dto.domain.User.class).getPassword();
-    }
-
     @Override
     public void save(com.techgenie.demo.dto.domain.User user) {
         userRepository.save(modelMapper.map(user,User.class));
+    }
+
+    @Override
+    public com.techgenie.demo.dto.domain.User findUserById(int id) {
+        return null;
     }
 }
