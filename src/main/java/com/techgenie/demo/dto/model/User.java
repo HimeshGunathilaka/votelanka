@@ -26,4 +26,8 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "user_type")
     private UserType types;
+
+    @ManyToOne
+    @JoinColumn(name = "area_id")
+    private Area voterArea;
 }

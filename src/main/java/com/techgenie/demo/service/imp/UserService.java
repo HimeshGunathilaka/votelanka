@@ -32,6 +32,7 @@ public class UserService implements IUserService {
                         .id(user.getUserId())
                         .name(user.getUserName())
                 .types(user.getTypes().getType())
+                .area(user.getVoterArea().getAreaName())
                         .password(user.getUserPassword())
                         .build());});
     return users;}

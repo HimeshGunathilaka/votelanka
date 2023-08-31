@@ -78,6 +78,9 @@ class VotelankaApplicationTests {
 	void Display(){
         userService.findAllUsers().forEach(user -> {
             System.out.println(user.getName());
+            System.out.println(user.getTypes());
+            System.out.println(user.getArea());
+
         });
 //		userTypeRepository.findAll().forEach(userType -> {
 //			System.out.println(userType.getType());
