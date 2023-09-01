@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/users")
+    @GetMapping("/*")
     public List<com.techgenie.demo.dto.domain.User> findAllUsers() {
         return userService.findAllUsers();
     }
@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping("/push")
-    public void push(@RequestBody com.techgenie.demo.dto.domain.User user) {
+    public void save(@RequestBody com.techgenie.demo.dto.domain.User user) {
         userService.save(user);
     }
 }

@@ -33,4 +33,13 @@ public class PartyService implements IPartyService {
         });
         return list;
     }
+
+    @Override
+    public void saveParty(Party party) {
+        partyRepository.save(com.techgenie.demo.dto.model.Party.builder()
+                .partyName(party.getName())
+                .partyNumber(party.getNo())
+                .partySymbol(party.getImage())
+                .build());
+    }
 }

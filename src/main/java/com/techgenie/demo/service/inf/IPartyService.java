@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IPartyService {
     List<Party> findAllParties();
+
+    void saveParty(Party party);
 }
