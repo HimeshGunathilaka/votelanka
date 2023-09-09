@@ -9,4 +9,6 @@ public interface IUserService {
     void save(com.techgenie.demo.dto.domain.User user);
 
     User findUserById(int id);
+
+    User findByUserName(String name);
 }

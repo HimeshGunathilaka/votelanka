@@ -57,13 +57,26 @@ public class UserService implements IUserService {
     @Transactional
     @Override
     public com.techgenie.demo.dto.domain.User findUserById(int id) {
-//        return modelMapper.map(userRepository.findById(id).map(user -> User.builder()
-//                .userId(user.getUserId())
-//                .userName(user.getUserName())
-//                .userPassword(user.getUserPassword())
-//                .types(user.getTypes())
-//                .build()),com.techgenie.demo.dto.domain.User.class);
-        return null;
+        User user = userRepository.findById(id).get();
+        return com.techgenie.demo.dto.domain.User.builder()
+                .id(user.getUserId())
+                .name(user.getUserName())
+                .password(user.getUserPassword())
+                .types(user.getTypes().getType())
+                .area(user.getVoterArea().getAreaName())
+                .build();
+    }
+
+    @Override
+    public com.techgenie.demo.dto.domain.User findByUserName(String name) {
+        User user = userRepository.findByuserName(name);
+        return com.techgenie.demo.dto.domain.User.builder()
+                .name(user.getUserName())
+                .id(user.getUserId())
+                .area(user.getVoterArea().getAreaName())
+                .password(user.getUserPassword())
+                .types(user.getTypes().getType())
+                .build();
     }
 
 }

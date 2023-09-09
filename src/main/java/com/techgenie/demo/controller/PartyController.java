@@ -18,6 +18,11 @@ public class PartyController {
         return partyService.findAllParties();
     }
 
+    @GetMapping("/party")
+    public Party findParty(int id) {
+        return partyService.findPartyById(id);
+    }
+
     @PostMapping("/push")
     public void saveParty(@RequestBody Party party) {
         partyService.saveParty(party);

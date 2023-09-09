@@ -42,4 +42,15 @@ public class PartyService implements IPartyService {
                 .partySymbol(party.getImage())
                 .build());
     }
+
+    @Override
+    public Party findPartyById(int id) {
+        com.techgenie.demo.dto.model.Party party = partyRepository.findById(id).get();
+        return Party.builder()
+                .id(party.getPartyId())
+                .name(party.getPartyName())
+                .image(party.getPartySymbol())
+                .no(party.getPartyNumber())
+                .build();
+    }
 }

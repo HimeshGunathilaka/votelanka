@@ -46,7 +46,8 @@ class VotelankaApplicationTests {
     @Test
 	void contextLoads() {
 //        System.out.println(areaService.findAreaByName("Galle").getAreaName());
-        System.out.println(userTypeRepository.findBytype("voter").getType());
+//        System.out.println(userTypeRepository.findBytype("voter").getType());
+        System.out.println(userService.findByUserName("himesh").getName());
 	}
 
 

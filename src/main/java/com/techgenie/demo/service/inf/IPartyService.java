@@ -8,4 +8,6 @@ public interface IPartyService {
     List<Party> findAllParties();
 
     void saveParty(Party party);
+
+    Party findPartyById(int id);
 }
