@@ -30,4 +30,16 @@ public class CandidateService implements ICandidateService {
         });
         return list;
     }
+
+    @Override
+    public void saveCandidate(Candidate candidate) {
+        candidateRepository.save(com.techgenie.demo.dto.model.Candidate.builder()
+                .candidateName(candidate.getName())
+                .candidateMobile(candidate.getMobileNo())
+                .candidateArea(null)
+                .candidateImage(candidate.getImage())
+                .candidateVoteNo(candidate.getNo())
+                .party(null)
+                .build());
+    }
 }

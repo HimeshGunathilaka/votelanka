@@ -30,10 +30,12 @@ public class Candidate {
     @Column(name = "Image", columnDefinition = "TEXT")
     private String candidateImage;
 
+    //    @OneToMany
     @OneToOne
     @JoinColumn(name = "party_id")
     private Party party;
 
+    //    @OneToMany
     @OneToOne
     @JoinColumn(name = "area_id")
     private Area candidateArea;

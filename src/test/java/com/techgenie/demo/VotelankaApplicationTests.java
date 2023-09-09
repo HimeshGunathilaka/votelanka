@@ -3,6 +3,7 @@ package com.techgenie.demo;
 import com.techgenie.demo.dto.model.UserType;
 import com.techgenie.demo.repository.UserRepository;
 import com.techgenie.demo.repository.UserTypeRepository;
+import com.techgenie.demo.service.inf.IAreaService;
 import com.techgenie.demo.service.inf.IPartyService;
 import com.techgenie.demo.service.inf.IUserService;
 import com.techgenie.demo.service.inf.IUserTypeService;
@@ -29,10 +30,23 @@ class VotelankaApplicationTests {
 
     @Autowired
     private IPartyService partyService;
+    @Autowired
+    private IAreaService areaService;
 
     List<String> list = new ArrayList<>();
-	@Test
+
+    @Test
+    void displayAreas() {
+//        areaService.findAreaByName("Galle");
+        areaService.findAllAreas().forEach(area -> {
+            System.out.println(area.getAreaName());
+        });
+    }
+
+    @Test
 	void contextLoads() {
+//        System.out.println(areaService.findAreaByName("Galle").getAreaName());
+        System.out.println(userTypeRepository.findBytype("voter").getType());
 	}
 
 

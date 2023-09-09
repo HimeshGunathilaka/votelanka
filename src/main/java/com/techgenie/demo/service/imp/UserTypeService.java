@@ -53,4 +53,9 @@ public class UserTypeService implements IUserTypeService {
     public com.techgenie.demo.dto.model.UserType findById(int id) {
         return modelMapper.map(userTypeRepository.findById(id), com.techgenie.demo.dto.model.UserType.class);
     }
+
+    @Override
+    public com.techgenie.demo.dto.model.UserType findByUserType(String type) {
+        return userTypeRepository.findBytype(type);
+    }
 }

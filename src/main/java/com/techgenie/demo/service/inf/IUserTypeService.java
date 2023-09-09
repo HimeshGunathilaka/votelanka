@@ -14,4 +14,6 @@ public interface IUserTypeService {
     void saveTypes(com.techgenie.demo.dto.model.UserType userType);
 
     com.techgenie.demo.dto.model.UserType findById(int id);
+
+    com.techgenie.demo.dto.model.UserType findByUserType(String type);
 }
