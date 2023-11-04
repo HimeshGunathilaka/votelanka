@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/party")
+@CrossOrigin
 public class PartyController {
     @Autowired
     private IPartyService partyService;

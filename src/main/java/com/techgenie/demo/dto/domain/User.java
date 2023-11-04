@@ -12,6 +12,7 @@ public class User {
     private long id;
     private String name;
     private String types;
-    private String password;
+    private String idNumber;
     private String area;
+    private String phone;
 }

@@ -20,8 +20,8 @@ public class User {
     @Column(name = "Name")
     private String userName;
 
-    @Column(name = "Password")
-    private String userPassword;
+    @Column(name = "IdNumber")
+    private String userIdNumber;
 
     @ManyToOne
     @JoinColumn(name = "user_type")
@@ -30,4 +30,7 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "area_id")
     private Area voterArea;
+
+    @Column(name = "Phone")
+    private String voterPhone;
 }

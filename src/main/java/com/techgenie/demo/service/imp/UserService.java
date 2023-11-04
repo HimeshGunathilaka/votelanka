@@ -39,7 +39,8 @@ public class UserService implements IUserService {
                 .name(user.getUserName())
                 .types(user.getTypes().getType())
                 .area(user.getVoterArea().getAreaName())
-                .password(user.getUserPassword())
+                .idNumber(user.getUserIdNumber())
+                .phone(user.getVoterPhone())
                 .build());
         });
     return users;}
@@ -47,10 +48,11 @@ public class UserService implements IUserService {
     @Override
     public void save(com.techgenie.demo.dto.domain.User user) {
         userRepository.save(User.builder()
-                .userPassword(user.getPassword())
+                .userIdNumber(user.getIdNumber())
                 .userName(user.getName())
                 .voterArea(areaService.findAreaByName(user.getArea()))
                 .types(userTypeRepository.findBytype(user.getTypes()))
+                .voterPhone(user.getPhone())
                 .build());
     }
 
@@ -61,9 +63,10 @@ public class UserService implements IUserService {
         return com.techgenie.demo.dto.domain.User.builder()
                 .id(user.getUserId())
                 .name(user.getUserName())
-                .password(user.getUserPassword())
+                .idNumber(user.getUserIdNumber())
                 .types(user.getTypes().getType())
                 .area(user.getVoterArea().getAreaName())
+                .phone(user.getVoterPhone())
                 .build();
     }
 
@@ -74,8 +77,9 @@ public class UserService implements IUserService {
                 .name(user.getUserName())
                 .id(user.getUserId())
                 .area(user.getVoterArea().getAreaName())
-                .password(user.getUserPassword())
+                .idNumber(user.getUserIdNumber())
                 .types(user.getTypes().getType())
+                .phone(user.getVoterPhone())
                 .build();
     }
 

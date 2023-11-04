@@ -104,7 +104,7 @@ class VotelankaApplicationTests {
             System.out.println(user.getName());
             System.out.println(user.getTypes());
             System.out.println(user.getArea());
-            System.out.println(user.getPassword());
+            System.out.println(user.getPhone());
         });
 	}
 
