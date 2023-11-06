@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,13 +18,38 @@ public class AreaService implements IAreaService {
     private ModelMapper modelMapper;
 
     @Override
-    public com.techgenie.demo.dto.model.Area findAreaByName(String name) {
-        return areaRepository.findByareaName(name);
+    public com.techgenie.demo.dto.domain.Area findAreaByName(String name) {
+        com.techgenie.demo.dto.model.Area area = areaRepository.findByareaName(name);
+        return com.techgenie.demo.dto.domain.Area.builder()
+                .name(area.getAreaName())
+                .no(Long.parseLong(area.getAreaNo()))
+                .id(area.getAreaId())
+                .build();
     }
 
     @Override
-    public List<com.techgenie.demo.dto.model.Area> findAllAreas() {
-        return areaRepository.findAll();
+    public List<com.techgenie.demo.dto.domain.Area> findAllAreas() {
+        List<com.techgenie.demo.dto.domain.Area> list = new ArrayList<>();
+        areaRepository.findAll().forEach(area -> {
+            list.add(com.techgenie.demo.dto.domain.Area.builder()
+                    .id(area.getAreaId())
+                    .no(Long.parseLong(area.getAreaNo()))
+                    .name(area.getAreaName())
+                    .build());
+        });
+        return list;
+    }
+
+    @Override
+    public com.techgenie.demo.dto.domain.Area findAreaById(int id) {
+        com.techgenie.demo.dto.model.Area area = areaRepository.findById(id).get();
+        return com.techgenie.demo.dto.domain.Area.builder()
+                .id(area.getAreaId())
+                .name(area.getAreaName())
+                .no(Long.parseLong(area.getAreaNo()))
+//                .candidates(area.getCandidates())
+//                .voters(area.getVoters())
+                .build();
     }
 
 

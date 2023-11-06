@@ -19,8 +19,8 @@ public class PartyController {
         return partyService.findAllParties();
     }
 
-    @GetMapping("/party")
-    public Party findParty(int id) {
+    @GetMapping("/party_id")
+    public Party findPartyById(int id) {
         return partyService.findPartyById(id);
     }
 

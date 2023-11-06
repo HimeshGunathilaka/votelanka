@@ -1,6 +1,7 @@
 package com.techgenie.demo.service.imp;
 
 import com.techgenie.demo.dto.model.User;
+import com.techgenie.demo.repository.AreaRepository;
 import com.techgenie.demo.repository.UserRepository;
 import com.techgenie.demo.repository.UserTypeRepository;
 import com.techgenie.demo.service.inf.IAreaService;
@@ -22,16 +23,17 @@ public class UserService implements IUserService {
     private UserTypeRepository userTypeRepository;
 
     @Autowired
+    private AreaRepository areaRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
     @Autowired
     private IAreaService areaService;
 
-    List<com.techgenie.demo.dto.domain.User> users =  new ArrayList<>();
-
     @Transactional
     @Override
     public List<com.techgenie.demo.dto.domain.User> findAllUsers() {
-        users.clear();
+        List<com.techgenie.demo.dto.domain.User> users = new ArrayList<>();
         //return propertyList.stream().map(p -> modelMapper.map(p, PropertyExtended.class)).collect(Collectors.toList());
         userRepository.findAll().forEach(user -> {
         users.add(com.techgenie.demo.dto.domain.User.builder()
@@ -45,12 +47,13 @@ public class UserService implements IUserService {
         });
     return users;}
 
+
     @Override
     public void save(com.techgenie.demo.dto.domain.User user) {
         userRepository.save(User.builder()
                 .userIdNumber(user.getIdNumber())
                 .userName(user.getName())
-                .voterArea(areaService.findAreaByName(user.getArea()))
+                .voterArea(areaRepository.findByareaName(user.getArea()))
                 .types(userTypeRepository.findBytype(user.getTypes()))
                 .voterPhone(user.getPhone())
                 .build());

@@ -1,6 +1,7 @@
 package com.techgenie.demo;
 
 import com.techgenie.demo.dto.model.UserType;
+import com.techgenie.demo.repository.AreaRepository;
 import com.techgenie.demo.repository.UserRepository;
 import com.techgenie.demo.repository.UserTypeRepository;
 import com.techgenie.demo.service.inf.IAreaService;
@@ -22,6 +23,9 @@ class VotelankaApplicationTests {
 	@Autowired
 	private UserRepository userRepository;
 
+    @Autowired
+    private AreaRepository areaRepository;
+
 	@Autowired
 	private UserTypeRepository userTypeRepository;
 
@@ -39,7 +43,7 @@ class VotelankaApplicationTests {
     void displayAreas() {
 //        areaService.findAreaByName("Galle");
         areaService.findAllAreas().forEach(area -> {
-            System.out.println(area.getAreaName());
+//            System.out.println(area.getAreaName());
         });
     }
 
@@ -82,12 +86,13 @@ class VotelankaApplicationTests {
 
 	@Test
 	void test(){
-        partyService.findAllParties().forEach(party -> {
-            System.out.println(party.getId());
-            System.out.println(party.getNo());
-            System.out.println(party.getName());
-            System.out.println(party.getImage());
-        });
+//        partyService.findAllParties().forEach(party -> {
+//            System.out.println(party.getId());
+//            System.out.println(party.getNo());
+//            System.out.println(party.getName());
+//            System.out.println(party.getImage());
+//        });
+//        System.out.println(areaService.findAreaByName("Colombo").getName());
     }
 
 	@Test
