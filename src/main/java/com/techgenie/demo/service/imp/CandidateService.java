@@ -1,7 +1,9 @@
 package com.techgenie.demo.service.imp;
 
 import com.techgenie.demo.dto.domain.Candidate;
+import com.techgenie.demo.repository.AreaRepository;
 import com.techgenie.demo.repository.CandidateRepository;
+import com.techgenie.demo.repository.PartyRepository;
 import com.techgenie.demo.service.inf.ICandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,15 @@ import java.util.List;
 public class CandidateService implements ICandidateService {
     @Autowired
     private CandidateRepository candidateRepository;
+
+    @Autowired
+    private AreaService areaService;
+
+    @Autowired
+    private AreaRepository areaRepository;
+
+    @Autowired
+    private PartyRepository partyRepository;
 
     @Override
     public List<Candidate> findAllCandidates() {
@@ -36,10 +47,10 @@ public class CandidateService implements ICandidateService {
         candidateRepository.save(com.techgenie.demo.dto.model.Candidate.builder()
                 .candidateName(candidate.getName())
                 .candidateMobile(candidate.getMobileNo())
-                .candidateArea(null)
+                .candidateArea(areaRepository.findByareaName(candidate.getArea()))
                 .candidateImage(candidate.getImage())
                 .candidateVoteNo(candidate.getNo())
-                .party(null)
+                .party(partyRepository.findBypartyName(candidate.getParty()))
                 .build());
     }
 }

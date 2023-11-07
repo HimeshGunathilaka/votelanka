@@ -2,6 +2,7 @@ package com.techgenie.demo;
 
 import com.techgenie.demo.dto.model.UserType;
 import com.techgenie.demo.repository.AreaRepository;
+import com.techgenie.demo.repository.PartyRepository;
 import com.techgenie.demo.repository.UserRepository;
 import com.techgenie.demo.repository.UserTypeRepository;
 import com.techgenie.demo.service.inf.IAreaService;
@@ -37,6 +38,9 @@ class VotelankaApplicationTests {
     @Autowired
     private IAreaService areaService;
 
+    @Autowired
+    private PartyRepository partyRepository;
+
     List<String> list = new ArrayList<>();
 
     @Test
@@ -51,7 +55,7 @@ class VotelankaApplicationTests {
 	void contextLoads() {
 //        System.out.println(areaService.findAreaByName("Galle").getAreaName());
 //        System.out.println(userTypeRepository.findBytype("voter").getType());
-        System.out.println(userService.findByUserName("himesh").getName());
+//        partyRepository.findBypartyName("JVP")
 	}
 
 

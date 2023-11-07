@@ -31,12 +31,12 @@ public class Candidate {
     private String candidateImage;
 
     //    @OneToMany
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "party_id")
     private Party party;
 
     //    @OneToMany
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "area_id")
     private Area candidateArea;
 }
