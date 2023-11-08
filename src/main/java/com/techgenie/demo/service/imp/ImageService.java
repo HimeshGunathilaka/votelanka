@@ -6,6 +6,7 @@ import com.techgenie.demo.service.inf.IImageService;
 import com.techgenie.demo.utils.ImageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class ImageService implements IImageService {
         return null;
     }
 
+    @Transactional
     @Override
     public byte[] downloadImage(String filename) {
         Optional<ImageData> dbImageData = imageRepository.findByimageName(filename);
