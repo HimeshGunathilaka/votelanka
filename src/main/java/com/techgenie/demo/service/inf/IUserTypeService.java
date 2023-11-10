@@ -9,9 +9,9 @@ public interface IUserTypeService {
 
     List<com.techgenie.demo.dto.model.UserType> getTypes();
 
-    void saveAllTypes(UserType userType);
+    String saveAllTypes(UserType userType);
 
-    void saveTypes(com.techgenie.demo.dto.model.UserType userType);
+    String saveTypes(com.techgenie.demo.dto.model.UserType userType);
 
     com.techgenie.demo.dto.model.UserType findById(int id);
 

@@ -33,19 +33,23 @@ public class CandidateService implements ICandidateService {
     @Transactional
     @Override
     public List<Candidate> findAllCandidates() {
-        List<Candidate> list = new ArrayList<>();
-        candidateRepository.findAll().forEach(candidate -> {
-            list.add(Candidate.builder()
-                    .no(candidate.getCandidateVoteNo())
-                    .id(candidate.getCandidateId())
-                    .area(candidate.getCandidateArea().getAreaName())
-                    .name(candidate.getCandidateName())
-                    .image(candidate.getCandidateImage().getImageName())
-                    .party(candidate.getParty().getPartyName())
-                    .mobileNo(candidate.getCandidateMobile())
-                    .build());
-        });
-        return list;
+        try {
+            List<Candidate> list = new ArrayList<>();
+            candidateRepository.findAll().forEach(candidate -> {
+                list.add(Candidate.builder()
+                        .no(candidate.getCandidateVoteNo())
+                        .id(candidate.getCandidateId())
+                        .area(candidate.getCandidateArea().getAreaName())
+                        .name(candidate.getCandidateName())
+                        .image(candidate.getCandidateImage().getImageName())
+                        .party(candidate.getParty().getPartyName())
+                        .mobileNo(candidate.getCandidateMobile())
+                        .build());
+            });
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Transactional

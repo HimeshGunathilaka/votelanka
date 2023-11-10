@@ -27,7 +27,7 @@ public class ImageService implements IImageService {
                     .build());
             return file.getOriginalFilename();
         } catch (Exception e) {
-            return e.toString();
+            return "Image couldn't be saved !";
         }
     }
 

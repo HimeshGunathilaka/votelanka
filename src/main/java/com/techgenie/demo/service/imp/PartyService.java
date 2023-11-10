@@ -22,25 +22,34 @@ public class PartyService implements IPartyService {
     @Transactional
     @Override
     public List<Party> findAllParties() {
-        List<Party> list = new ArrayList<>();
-        partyRepository.findAll().forEach(party -> {
-            list.add(Party.builder()
-                    .id(party.getPartyId())
-                    .name(party.getPartyName())
-                    .no(party.getPartyNumber())
-                    .image(party.getPartySymbol())
-                    .build());
-        });
-        return list;
+        try {
+            List<Party> list = new ArrayList<>();
+            partyRepository.findAll().forEach(party -> {
+                list.add(Party.builder()
+                        .id(party.getPartyId())
+                        .name(party.getPartyName())
+                        .no(party.getPartyNumber())
+                        .image(party.getPartySymbol())
+                        .build());
+            });
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
-    public void saveParty(Party party) {
-        partyRepository.save(com.techgenie.demo.dto.model.Party.builder()
-                .partyName(party.getName())
-                .partyNumber(party.getNo())
-                .partySymbol(party.getImage())
-                .build());
+    public String saveParty(Party party) {
+        try {
+            partyRepository.save(com.techgenie.demo.dto.model.Party.builder()
+                    .partyName(party.getName())
+                    .partyNumber(party.getNo())
+                    .partySymbol(party.getImage())
+                    .build());
+            return "Party saved successfully !";
+        } catch (Exception e) {
+            return "Party couldn't be saved !";
+        }
     }
 
     @Override

@@ -21,16 +21,29 @@ public class UserController {
 
     @GetMapping("/*")
     public List<com.techgenie.demo.dto.domain.User> findAllUsers() {
-        return userService.findAllUsers();
+        try {
+            return userService.findAllUsers();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @GetMapping("/user")
     public User findUser(int id) {
-        return userService.findUserById(id);
+        try {
+            return userService.findUserById(id);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @PostMapping("/push")
-    public void save(@RequestBody com.techgenie.demo.dto.domain.User user) {
-        userService.save(user);
+    public String save(@RequestBody com.techgenie.demo.dto.domain.User user) {
+        try {
+            userService.save(user);
+            return "Voter saved successfully !";
+        } catch (Exception e) {
+            return "An error occurred !";
+        }
     }
 }

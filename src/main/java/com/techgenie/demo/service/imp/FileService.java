@@ -21,27 +21,32 @@ public class FileService implements IFileService {
 
     @Override
     public String save(MultipartFile file) throws IOException {
-        String filePath = FOLDER_PATH + file.getOriginalFilename();
-        FileData fileData = fileDataRepository.save(FileData.builder()
-                .fileName(file.getOriginalFilename())
-                .fileType(file.getContentType())
-                .filePath(filePath)
-                .build());
-        file.transferTo(new File(filePath));
-        if (fileData != null) {
+        try {
+            String filePath = FOLDER_PATH + file.getOriginalFilename();
+            FileData fileData = fileDataRepository.save(FileData.builder()
+                    .fileName(file.getOriginalFilename())
+                    .fileType(file.getContentType())
+                    .filePath(filePath)
+                    .build());
+            file.transferTo(new File(filePath));
             return file.getOriginalFilename();
+        } catch (Exception e) {
+            return "Image couldn't be saved !";
         }
-        return null;
     }
 
     @Override
     public byte[] findFile(String filename) throws IOException {
-        Optional<FileData> fileData = fileDataRepository.findByfileName(filename);
-        com.techgenie.demo.dto.domain.FileData file = com.techgenie.demo.dto.domain.FileData.builder()
-                .id(fileData.get().getFileId())
-                .name(fileData.get().getFileName())
-                .type(fileData.get().getFileType())
-                .path(fileData.get().getFilePath()).build();
-        return Files.readAllBytes(new File(file.getPath()).toPath());
+        try {
+            Optional<FileData> fileData = fileDataRepository.findByfileName(filename);
+            com.techgenie.demo.dto.domain.FileData file = com.techgenie.demo.dto.domain.FileData.builder()
+                    .id(fileData.get().getFileId())
+                    .name(fileData.get().getFileName())
+                    .type(fileData.get().getFileType())
+                    .path(fileData.get().getFilePath()).build();
+            return Files.readAllBytes(new File(file.getPath()).toPath());
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

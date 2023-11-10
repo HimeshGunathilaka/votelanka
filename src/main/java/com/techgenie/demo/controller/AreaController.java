@@ -19,16 +19,29 @@ public class AreaController {
 
     @GetMapping("/*")
     public List<Area> findAllAreas() {
-        return areaService.findAllAreas();
+        try {
+            return areaService.findAllAreas();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @GetMapping("/area_name")
     public Area findAreaByName(String name) {
-        return areaService.findAreaByName(name);
+        try {
+            return areaService.findAreaByName(name);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @GetMapping("/area_id")
     public Area findByAreaId(int id) {
-        return areaService.findAreaById(id);
+        try {
+            return areaService.findAreaById(id);
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 }
