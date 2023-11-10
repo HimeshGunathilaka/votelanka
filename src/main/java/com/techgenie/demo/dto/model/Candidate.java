@@ -27,8 +27,9 @@ public class Candidate {
     @Column(name = "VoteNo")
     private String candidateVoteNo;
 
-    @Column(name = "Image", columnDefinition = "TEXT")
-    private String candidateImage;
+    @OneToOne
+    @JoinColumn(name = "image_id")
+    private ImageData candidateImage;
 
     //    @OneToMany
     @ManyToOne

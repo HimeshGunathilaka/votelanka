@@ -18,23 +18,33 @@ public class ImageService implements IImageService {
     private ImageRepository imageRepository;
 
     @Override
-    public String uploadImage(MultipartFile file) throws IOException {
-        ImageData imageData = imageRepository.save(ImageData.builder()
-                .imageName(file.getOriginalFilename())
-                .imageType(file.getContentType())
-                .imageData(ImageUtils.compressImage(file.getBytes()))
-                .build());
-        if (imageData != null) {
-            return "File uploaded successfully" + file.getOriginalFilename();
+    public String save(MultipartFile file) throws IOException {
+        try {
+            ImageData imageData = imageRepository.save(ImageData.builder()
+                    .imageName(file.getOriginalFilename())
+                    .imageType(file.getContentType())
+                    .imageData(ImageUtils.compressImage(file.getBytes()))
+                    .build());
+            return file.getOriginalFilename();
+        } catch (Exception e) {
+            return e.toString();
         }
-        return null;
     }
 
     @Transactional
     @Override
-    public byte[] downloadImage(String filename) {
-        Optional<ImageData> dbImageData = imageRepository.findByimageName(filename);
-        return ImageUtils.decompressImage(dbImageData.get().getImageData());
+    public byte[] findImage(String filename) {
+        try {
+            Optional<ImageData> dbImageData = imageRepository.findByimageName(filename);
+            com.techgenie.demo.dto.domain.ImageData image = com.techgenie.demo.dto.domain.ImageData.builder()
+                    .id(dbImageData.get().getImageId())
+                    .name(dbImageData.get().getImageName())
+                    .type(dbImageData.get().getImageType())
+                    .data(dbImageData.get().getImageData()).build();
+            return ImageUtils.decompressImage(image.getData());
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }

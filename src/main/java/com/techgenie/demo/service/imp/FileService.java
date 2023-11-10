@@ -20,7 +20,7 @@ public class FileService implements IFileService {
     private FileDataRepository fileDataRepository;
 
     @Override
-    public String uploadImageToFileSystem(MultipartFile file) throws IOException {
+    public String save(MultipartFile file) throws IOException {
         String filePath = FOLDER_PATH + file.getOriginalFilename();
         FileData fileData = fileDataRepository.save(FileData.builder()
                 .fileName(file.getOriginalFilename())
@@ -29,16 +29,19 @@ public class FileService implements IFileService {
                 .build());
         file.transferTo(new File(filePath));
         if (fileData != null) {
-            return "File uploaded successfully" + filePath;
+            return file.getOriginalFilename();
         }
         return null;
     }
 
     @Override
-    public byte[] downloadImageFromFileSystem(String filename) throws IOException {
+    public byte[] findFile(String filename) throws IOException {
         Optional<FileData> fileData = fileDataRepository.findByfileName(filename);
-        String filePath = fileData.get().getFilePath();
-        byte[] image = Files.readAllBytes(new File(filePath).toPath());
-        return image;
+        com.techgenie.demo.dto.domain.FileData file = com.techgenie.demo.dto.domain.FileData.builder()
+                .id(fileData.get().getFileId())
+                .name(fileData.get().getFileName())
+                .type(fileData.get().getFileType())
+                .path(fileData.get().getFilePath()).build();
+        return Files.readAllBytes(new File(file.getPath()).toPath());
     }
 }

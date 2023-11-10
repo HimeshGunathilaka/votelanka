@@ -27,4 +27,7 @@ public class ImageData {
     @Lob
     @Column(name = "ImageData", length = 1000)
     private byte[] imageData;
+
+    @OneToOne(mappedBy = "candidateImage")
+    private Candidate candidate;
 }

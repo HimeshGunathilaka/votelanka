@@ -3,10 +3,12 @@ package com.techgenie.demo.service.imp;
 import com.techgenie.demo.dto.domain.Candidate;
 import com.techgenie.demo.repository.AreaRepository;
 import com.techgenie.demo.repository.CandidateRepository;
+import com.techgenie.demo.repository.ImageRepository;
 import com.techgenie.demo.repository.PartyRepository;
 import com.techgenie.demo.service.inf.ICandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,10 @@ public class CandidateService implements ICandidateService {
     @Autowired
     private PartyRepository partyRepository;
 
+    @Autowired
+    private ImageRepository imageRepository;
+
+    @Transactional
     @Override
     public List<Candidate> findAllCandidates() {
         List<Candidate> list = new ArrayList<>();
@@ -34,7 +40,7 @@ public class CandidateService implements ICandidateService {
                     .id(candidate.getCandidateId())
                     .area(candidate.getCandidateArea().getAreaName())
                     .name(candidate.getCandidateName())
-                    .image(candidate.getCandidateImage())
+                    .image(candidate.getCandidateImage().getImageName())
                     .party(candidate.getParty().getPartyName())
                     .mobileNo(candidate.getCandidateMobile())
                     .build());
@@ -42,15 +48,21 @@ public class CandidateService implements ICandidateService {
         return list;
     }
 
+    @Transactional
     @Override
-    public void saveCandidate(Candidate candidate) {
-        candidateRepository.save(com.techgenie.demo.dto.model.Candidate.builder()
-                .candidateName(candidate.getName())
-                .candidateMobile(candidate.getMobileNo())
-                .candidateArea(areaRepository.findByareaName(candidate.getArea()))
-                .candidateImage(candidate.getImage())
-                .candidateVoteNo(candidate.getNo())
-                .party(partyRepository.findBypartyName(candidate.getParty()))
-                .build());
+    public String saveCandidate(Candidate candidate) {
+        try {
+            candidateRepository.save(com.techgenie.demo.dto.model.Candidate.builder()
+                    .candidateName(candidate.getName())
+                    .candidateMobile(candidate.getMobileNo())
+                    .candidateArea(areaRepository.findByareaName(candidate.getArea()))
+                    .candidateImage(imageRepository.findByimageName(candidate.getImage()).get())
+                    .candidateVoteNo(candidate.getNo())
+                    .party(partyRepository.findBypartyName(candidate.getParty()))
+                    .build());
+            return "Candidate saved successfully !";
+        } catch (Exception e) {
+            return "Candidate couldn't be saved !";
+        }
     }
 }

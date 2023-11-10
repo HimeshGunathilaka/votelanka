@@ -17,12 +17,20 @@ public class CandidateController {
 
     @GetMapping("/*")
     public List<Candidate> findAllCandidates() {
-        return candidateService.findAllCandidates();
+        try {
+            return candidateService.findAllCandidates();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @PostMapping("/push")
-    public void saveCandidate(@RequestBody Candidate candidate) {
-        candidateService.saveCandidate(candidate);
+    public String saveCandidate(@RequestBody Candidate candidate) {
+        try {
+            return candidateService.saveCandidate(candidate);
+        } catch (Exception e) {
+            return "An error occurred !";
+        }
     }
 
 }

@@ -24,25 +24,42 @@ public class ImageController {
 
     @PostMapping("/database")
     public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
-        String uploadImage = imageService.uploadImage(file);
-        return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
+        try {
+            String uploadImage = imageService.save(file);
+            return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @GetMapping("/database/{filename}")
     public ResponseEntity<?> downloadImage(@PathVariable String filename) throws IOException {
-        byte[] imageData = imageService.downloadImage(filename);
-        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(imageData);
+        try {
+            byte[] imageData = imageService.findImage(filename);
+            return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(imageData);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @PostMapping("/fileSystem")
     public ResponseEntity<?> uploadImageToFileSystem(@RequestParam("image") MultipartFile file) throws IOException {
-        String uploadImage = fileService.uploadImageToFileSystem(file);
-        return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
+        try {
+            String uploadImage = fileService.save(file);
+            return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @GetMapping("/fileSystem/{filename}")
     public ResponseEntity<?> downloadImageFromFileSystem(@PathVariable String filename) throws IOException {
-        byte[] imageData = fileService.downloadImageFromFileSystem(filename);
-        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(imageData);
+        try {
+            byte[] imageData = fileService.findFile(filename);
+            return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(imageData);
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 }
