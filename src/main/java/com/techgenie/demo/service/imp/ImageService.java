@@ -10,12 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ImageService implements IImageService {
     @Autowired
     private ImageRepository imageRepository;
+
 
     @Override
     public String save(MultipartFile file) throws IOException {
@@ -42,6 +45,27 @@ public class ImageService implements IImageService {
                     .type(dbImageData.get().getImageType())
                     .data(dbImageData.get().getImageData()).build();
             return ImageUtils.decompressImage(image.getData());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Transactional
+    @Override
+    public List<byte[]> findAllImages() {
+        try {
+            List<byte[]> images = new ArrayList<>();
+            imageRepository.findAll().forEach(imageData1 -> {
+                com.techgenie.demo.dto.domain.ImageData image = com.techgenie.demo.dto.domain.ImageData.builder()
+                        .id(imageData1.getImageId())
+                        .name(imageData1.getImageName())
+                        .type(imageData1.getImageType())
+                        .data(imageData1.getImageData())
+                        .build();
+
+                images.add(ImageUtils.decompressImage(image.getData()));
+            });
+            return images;
         } catch (Exception e) {
             return null;
         }

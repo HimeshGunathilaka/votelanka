@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/image")
@@ -21,6 +22,15 @@ public class ImageController {
 
     @Autowired
     private IFileService fileService;
+
+    @GetMapping("/database/*")
+    public List<byte[]> findAllImages() {
+        try {
+            return imageService.findAllImages();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     @PostMapping("/database")
     public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
