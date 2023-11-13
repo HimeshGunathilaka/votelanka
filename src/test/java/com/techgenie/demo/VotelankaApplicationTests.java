@@ -1,39 +1,55 @@
 package com.techgenie.demo;
 
 import com.techgenie.demo.dto.model.UserType;
+import com.techgenie.demo.repository.AreaRepository;
+import com.techgenie.demo.repository.PartyRepository;
 import com.techgenie.demo.repository.UserRepository;
 import com.techgenie.demo.repository.UserTypeRepository;
-import com.techgenie.demo.service.inf.IPartyService;
-import com.techgenie.demo.service.inf.IUserService;
-import com.techgenie.demo.service.inf.IUserTypeService;
+import com.techgenie.demo.service.inf.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
 class VotelankaApplicationTests {
-	@Autowired
-	private IUserService userService;
-
-	@Autowired
-	private UserRepository userRepository;
-
-	@Autowired
-	private UserTypeRepository userTypeRepository;
-
-	@Autowired
-	private IUserTypeService userTypeService;
-
+    List<String> list = new ArrayList<>();
+    @Autowired
+    private IUserService userService;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private AreaRepository areaRepository;
+    @Autowired
+    private UserTypeRepository userTypeRepository;
+    @Autowired
+    private IUserTypeService userTypeService;
     @Autowired
     private IPartyService partyService;
+    @Autowired
+    private IAreaService areaService;
+    @Autowired
+    private PartyRepository partyRepository;
+    @Autowired
+    private IImageService imageService;
 
-    List<String> list = new ArrayList<>();
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void displayAreas() {
+//        areaService.findAreaByName("Galle");
+        areaService.findAllAreas().forEach(area -> {
+//            System.out.println(area.getAreaName());
+        });
+    }
+
+    @Test
+    void contextLoads() {
+        imageService.findAllImages().forEach(imageData -> {
+            System.out.println(Arrays.toString(imageData));
+        });
+    }
 
 
     @Test
@@ -65,37 +81,38 @@ class VotelankaApplicationTests {
         }
     }
 
-	@Test
-	void test(){
-        partyService.findAllParties().forEach(party -> {
-            System.out.println(party.getId());
-            System.out.println(party.getNo());
-            System.out.println(party.getName());
-            System.out.println(party.getImage());
-        });
+    @Test
+    void test() {
+//        partyService.findAllParties().forEach(party -> {
+//            System.out.println(party.getId());
+//            System.out.println(party.getNo());
+//            System.out.println(party.getName());
+//            System.out.println(party.getImage());
+//        });
+//        System.out.println(areaService.findAreaByName("Colombo").getName());
     }
 
-	@Test
-	void saveType() {
-		userTypeService.saveTypes(UserType.builder()
-				.type("admin")
-				.build());
-	}
+    @Test
+    void saveType() {
+        userTypeService.saveTypes(UserType.builder()
+                .type("admin")
+                .build());
+    }
 
-	@Test
-	void Display(){
+    @Test
+    void Display() {
         userService.findAllUsers().forEach(user -> {
             System.out.println(user.getId());
             System.out.println(user.getName());
             System.out.println(user.getTypes());
             System.out.println(user.getArea());
-            System.out.println(user.getPassword());
+            System.out.println(user.getPhone());
         });
-	}
+    }
 
-	@Test
-	void save(){
+    @Test
+    void save() {
 //		userService.save(User.builder()
 //				.name("mushthak").password("45625").types(userTypeService.findById(1)).build());
-	}
+    }
 }

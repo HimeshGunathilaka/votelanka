@@ -23,34 +23,65 @@ public class UserTypeService implements IUserTypeService {
     @Transactional
     @Override
     public List<UserType> getAllTypes() {
-        userTypeRepository.findAll().forEach(userType -> {
-            userTypes.add(UserType.builder()
-                    .type(userType.getType())
-                    .users(userType.getUsers())
-                    .build());
-        });
-        return userTypes;
+        try {
+            userTypeRepository.findAll().forEach(userType -> {
+                userTypes.add(UserType.builder()
+                        .type(userType.getType())
+                        .users(userType.getUsers())
+                        .build());
+            });
+            return userTypes;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Transactional
     @Override
     public List<com.techgenie.demo.dto.model.UserType> getTypes() {
-        return userTypeRepository.findAll();
+        try {
+            return userTypeRepository.findAll();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
-    public void saveAllTypes(UserType userType) {
-        userTypeRepository.save(modelMapper.map(userType, com.techgenie.demo.dto.model.UserType.class));
+    public String saveAllTypes(UserType userType) {
+        try {
+            userTypeRepository.save(modelMapper.map(userType, com.techgenie.demo.dto.model.UserType.class));
+            return "User Types saved successfully !";
+        } catch (Exception e) {
+            return "User Types couldn't be saved !";
+        }
     }
 
     @Override
-    public void saveTypes(com.techgenie.demo.dto.model.UserType userType) {
-        userTypeRepository.save(userType);
+    public String saveTypes(com.techgenie.demo.dto.model.UserType userType) {
+        try {
+            userTypeRepository.save(userType);
+            return "User Type saved successfully !";
+        } catch (Exception e) {
+            return "User Type couldn't be saved !";
+        }
     }
 
     @Transactional
     @Override
     public com.techgenie.demo.dto.model.UserType findById(int id) {
-        return modelMapper.map(userTypeRepository.findById(id), com.techgenie.demo.dto.model.UserType.class);
+        try {
+            return modelMapper.map(userTypeRepository.findById(id), com.techgenie.demo.dto.model.UserType.class);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public com.techgenie.demo.dto.model.UserType findByUserType(String type) {
+        try {
+            return userTypeRepository.findBytype(type);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

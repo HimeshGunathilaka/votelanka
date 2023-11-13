@@ -8,11 +8,9 @@ import lombok.*;
 @Setter
 @Builder
 @Data
-public class User {
+public class FileData {
     private long id;
     private String name;
-    private String types;
-    private String idNumber;
-    private String area;
-    private String phone;
+    private String type;
+    private String path;
 }
